@@ -98,5 +98,27 @@ class WorkerTest {
     Assertions.assertEquals(new Double(10.5), testWorker.getSalary());
   }
   
+  @Test
+  void testGetQualifications() {
+    HashSet<Qualification> returnedQualifcations = testWorker.getQualifications();
+    Assertions.assertIterableEquals(testQaulifications, returnedQualifcations);
+  }
+  
+  @Test
+  void testAddQualificationsTrue() throws NullPointerException, InvalidDescription {
+    Assertions.assertTrue(testWorker.addQualification(new Qualification("Q 2")));
+  }
+  
+  @Test
+  void testAddQualificationsFalse() throws NullPointerException, InvalidDescription {
+    Assertions.assertTrue(testWorker.addQualification(new Qualification("Q 1")));
+  }
+  
+  @Test
+  void testAddQualificationsNull() throws NullPointerException, InvalidDescription {
+    Assertions.assertThrows(NullPointerException.class, () ->{
+      testWorker.addQualification(null);
+    });
+  }
 
 }

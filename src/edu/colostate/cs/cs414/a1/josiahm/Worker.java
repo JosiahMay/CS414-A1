@@ -14,8 +14,9 @@ public class Worker {
    * @param qs The set qualifications of the worker
    * @throws InvalidDescription An empty name was given
    * @throws InvalidQualifications An empty set of qualification was given
+   * @throws NullPointerException Either the name or set of qualifications are null
    */
-  public Worker(String name, HashSet<Qualification> qs ) throws InvalidDescription, InvalidQualifications {
+  public Worker(String name, HashSet<Qualification> qs ) throws InvalidDescription, InvalidQualifications,  NullPointerException{
     
     if(name == null) {
       throw new NullPointerException("The name for a worker can not be null");
@@ -42,7 +43,7 @@ public class Worker {
    * @return the name of the worker
    */
   public String getName() {
-    return name;
+    return this.name;
   }
   
   /**
@@ -50,7 +51,7 @@ public class Worker {
    * @return The salary
    */
   public Double getSalary() {
-    return salary;
+    return this.salary;
   }
   
   /**
@@ -61,5 +62,25 @@ public class Worker {
     this.salary = salary;
   }
   
+  /**
+   * Returns a shallow copy of the qualifications
+   * @return A copy of the qualifications
+   */
+  public HashSet<Qualification> getQualifications(){
+    return new HashSet<Qualification>(this.qualifications);
+  }
+  
+  /**
+   * Adds a new qualification to the worker
+   * @param q the new qualification
+   * @return True if qualification added to set or False if not added
+   * @throws NullPointerException
+   */
+  public boolean addQualification(Qualification q) throws NullPointerException{
+    if(q == null) {
+      throw new NullPointerException("The new qualification for a worker can not be null");
+    }
+    return this.qualifications.add(q);
+  }
 
 }
