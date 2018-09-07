@@ -5,10 +5,12 @@ public class Qualification {
   final private String description;
 
   /**
+   * Constructor for the qualification class. The description of the object is given
+   * during construction
    * 
-   * @param description
-   * @throws InvalidDescription
-   * @throws NullPointerException
+   * @param description The description for this qualification
+   * @throws InvalidDescription The description is empty string or all white spaces
+   * @throws NullPointerException The description is null
    */
   public Qualification(String description) throws InvalidDescription, NullPointerException {
     
@@ -23,6 +25,11 @@ public class Qualification {
     this.description = description; 
   }
   
+  /**
+   * Checks if the description of two qualification is the same
+   *
+   * @return The qualification have the same description
+   */
   @Override
   public boolean equals(Object o) {
     if(o instanceof Qualification){
@@ -34,6 +41,15 @@ public class Qualification {
     
   }
   
+  /**
+   * The description of the qualification
+   *
+   * @return The description
+   */
+  @Override
+  public String toString() {
+    return description;
+  }
   
 
 }
