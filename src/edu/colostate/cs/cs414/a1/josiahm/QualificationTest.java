@@ -31,7 +31,7 @@ class QualificationTest {
     });
   }
   @Test
-  void testQualificationInvalidDescriptionSpacesAndLetters() {
+  void testQualificatioValidDescriptionSpacesAndLetters() {
     try {
       Qualification invalidDescription = new Qualification("  as");
       Assertions.assertTrue(true);

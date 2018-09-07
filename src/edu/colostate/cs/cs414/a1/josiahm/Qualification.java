@@ -17,9 +17,9 @@ public class Qualification {
     if(description == null) {
       throw new NullPointerException("The description for a Qualification can not be null");
     }
-    System.out.println(description + ": " + description.matches(".*\\S+.*"));
+    
     if(description.length() == 0 || !description.matches(".*\\S+.*")) {
-      throw new InvalidDescription("The name for a qaulifcation must not be empty: " + description);
+      throw new InvalidDescription("The name for a qaulifcation must not be empty");
     }
     
     this.description = description; 
