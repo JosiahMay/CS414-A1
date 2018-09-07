@@ -44,5 +44,22 @@ public class Worker {
   public String getName() {
     return name;
   }
+  
+  /**
+   * Gets the workers salary
+   * @return The salary
+   */
+  public Double getSalary() {
+    return salary;
+  }
+  
+  /**
+   * Sets the workers salary
+   * @param salary The new salary
+   */
+  public void setSalary(Double salary) {
+    this.salary = salary;
+  }
+  
 
 }

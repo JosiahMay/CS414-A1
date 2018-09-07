@@ -86,5 +86,17 @@ class WorkerTest {
   void testGetName() {
     Assertions.assertEquals(workerName, testWorker.getName());
   }
+  
+  @Test
+  void testGetSalary() {
+    Assertions.assertEquals(new Double(0.0), testWorker.getSalary());
+  }
+  
+  @Test
+  void testSetSalary() {
+    testWorker.setSalary(new Double(10.5));
+    Assertions.assertEquals(new Double(10.5), testWorker.getSalary());
+  }
+  
 
 }
