@@ -9,16 +9,30 @@ import org.junit.jupiter.api.Test;
 
 class WorkerTest {
   
+  private final String workerName = "Valid";
+  
   private HashSet<Qualification> testQaulifications = new HashSet<Qualification>();
   private Worker testWorker;
   
   
   @BeforeEach
-  void resetQualifications() throws NullPointerException, InvalidDescription {
+  void resetQualifications() throws NullPointerException, InvalidDescription, InvalidQualifications {
     testQaulifications.clear();
     testQaulifications.add(new Qualification("Q 1"));
+    testWorker = new Worker(workerName, testQaulifications);
   }
 
+  @Test
+  void testWorker() {
+      try {
+        testWorker = new Worker(workerName, testQaulifications);
+      } catch (InvalidDescription | InvalidQualifications e) {
+        fail(e.getMessage());
+      }
+      
+  
+  }
+  
   @Test
   void testWorkerNameNullPointerException() {
     Assertions.assertThrows(NullPointerException.class, () -> {
@@ -30,7 +44,7 @@ class WorkerTest {
   @Test
   void testWorkerInvalidNameEmpty() {
     Assertions.assertThrows(InvalidDescription.class, () -> {
-      Worker testWorker = new Worker("", testQaulifications);
+      testWorker = new Worker("", testQaulifications);
       
     });
   }
@@ -48,9 +62,7 @@ class WorkerTest {
     try {
       testWorker = new Worker("  as", testQaulifications);
       Assertions.assertTrue(true);
-    } catch (NullPointerException e) {
-      fail(e.getMessage());
-    } catch (InvalidDescription e) {
+    } catch (InvalidDescription | InvalidQualifications e) {
       fail(e.getMessage());
     }
   }
@@ -59,16 +71,20 @@ class WorkerTest {
   void testWorkerEmptyQualification() {
     Assertions.assertThrows(InvalidQualifications.class, () ->{
       testQaulifications.clear();
-      testWorker = new Worker("Valid", testQaulifications);
+      testWorker = new Worker(workerName, testQaulifications);
     });
   }
   
   @Test
   void testWorkerNullQualification() {
     Assertions.assertThrows(NullPointerException.class, () ->{
-      testWorker = new Worker("Valid", null);
+      testWorker = new Worker(workerName, null);
     });
   }
   
+  @Test
+  void testGetName() {
+    Assertions.assertEquals(workerName, testWorker.getName());
+  }
 
 }
