@@ -67,7 +67,7 @@ public class Worker {
    * @return A copy of the qualifications
    */
   public HashSet<Qualification> getQualifications(){
-    return new HashSet<Qualification>(this.qualifications);
+    return this.qualifications;
   }
   
   /**

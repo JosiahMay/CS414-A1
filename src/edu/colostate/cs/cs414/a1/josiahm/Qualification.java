@@ -53,7 +53,6 @@ public class Qualification {
     } 
     
     return false;
-    
   }
   
   /**
