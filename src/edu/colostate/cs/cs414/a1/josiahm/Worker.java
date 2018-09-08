@@ -83,6 +83,11 @@ public class Worker {
     return this.qualifications.add(q);
   }
   
+  @Override
+  public int hashCode() {
+	  return this.name.hashCode();
+  }
+  
   
 
 }

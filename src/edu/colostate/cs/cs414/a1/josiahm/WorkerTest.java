@@ -111,7 +111,7 @@ class WorkerTest {
   
   @Test
   void testAddQualificationsFalse() throws NullPointerException, InvalidDescription {
-    Assertions.assertTrue(testWorker.addQualification(new Qualification("Q 1")));
+    Assertions.assertFalse(testWorker.addQualification(new Qualification("Q 1")));
   }
   
   @Test

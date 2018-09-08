@@ -51,5 +51,9 @@ public class Qualification {
     return description;
   }
   
+  @Override
+  public int hashCode() {
+	  return this.description.hashCode();
+  }
 
 }
