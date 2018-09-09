@@ -5,7 +5,8 @@ import java.util.HashSet;
 public class Qualification {
   
   final private String description;
-  final private HashSet<Worker> workerWithQual = new HashSet<Worker>();
+  final private HashSet<Worker> workerWithQual;
+  final private HashSet<Project> projectWithQual;
 
   /**
    * Constructor for the qualification class. The description of the object is given
@@ -25,7 +26,9 @@ public class Qualification {
       throw new InvalidDescription("The name for a qaulifcation must not be empty");
     }
     
-    this.description = description; 
+    this.description = description;
+    workerWithQual = new HashSet<Worker>();
+    projectWithQual = new HashSet<Project>();
   }
   
   /**
@@ -41,7 +44,18 @@ public class Qualification {
   }
   
   /**
-   * Checks if the description of two qualification is the same
+   * Adds a project to a set of all workers that have this qualification
+   * @param p the project to add
+   */
+  public void addProject(Project p) {
+    if (p == null) {
+      throw new NullPointerException("The a project to add to a qaualification can not be null");
+  }
+  this.projectWithQual.add(p);
+  }
+
+  /**
+   * Checks if the description of two qualification are the same
    *
    * @return The qualification have the same description
    */
@@ -70,4 +84,5 @@ public class Qualification {
 	  return this.description.hashCode();
   }
 
+  
 }

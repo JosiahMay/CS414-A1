@@ -6,6 +6,7 @@ public class Worker {
   
   private final String name;
   private final HashSet<Qualification> qualifications;
+  private final HashSet<Project> projects;
   private Double salary = 0.0;
 
   /**
@@ -35,7 +36,8 @@ public class Worker {
       }
     
     this.name = name;
-    this.qualifications = qs;
+    this.qualifications = new HashSet<Qualification>(qs);
+    this.projects = new HashSet<Project>();
   }
   
   /**
@@ -81,6 +83,24 @@ public class Worker {
       throw new NullPointerException("The new qualification for a worker can not be null");
     }
     return this.qualifications.add(q);
+  }
+  
+  
+  
+  
+  /**
+   * Checks if the name of two workers are the same
+   *
+   * @return The worker have the same name
+   */
+  @Override
+  public boolean equals(Object o) {
+    if(o instanceof Worker){
+      Worker other = (Worker) o;
+      return this.name.equals(other.name);
+    } 
+    
+    return false;
   }
   
   @Override

@@ -120,5 +120,7 @@ class WorkerTest {
       testWorker.addQualification(null);
     });
   }
+  
+  
 
 }
