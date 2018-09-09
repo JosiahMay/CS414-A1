@@ -100,7 +100,7 @@ public class Project {
    */
   public boolean isHelpful(Worker w) throws NullPointerException {
     for(Qualification q: w.getQualifications()) {
-      if(qualifications.contains(q)) {
+      if(missingQualifications().contains(q)) {
         return true;
       }
     }
@@ -112,7 +112,7 @@ public class Project {
    * @return the workers assigned 
    */
   public HashSet<Worker> getWorkers(){
-    return this.assignedWorker;
+    return new HashSet<Worker>(assignedWorker);
   }
   
   /**

@@ -133,9 +133,26 @@ class WorkerTest {
   }
   
   @Test
+  void testRemoveProject() throws NullPointerException, InvalidName, InvalidQualifications {
+    Project project = new Project("Valid Project", ProjectSize.LARGE, ProjectStatus.PLANNED, testQaulifications);
+    
+    testWorker.addProject(project);
+    testWorker.removeProject(project);
+    
+    Assertions.assertIterableEquals(new HashSet<Project>(), testWorker.getProjects());
+  }
+  
+  @Test
   void testAddProjectNull() throws NullPointerException, InvalidDescription {
     Assertions.assertThrows(NullPointerException.class, () ->{
       testWorker.addProject(null);
+    });
+  }
+  
+  @Test
+  void testRemoveProjectNull() throws NullPointerException, InvalidDescription {
+    Assertions.assertThrows(NullPointerException.class, () ->{
+      testWorker.removeProject(null);
     });
   }
   
@@ -151,6 +168,36 @@ class WorkerTest {
     String workerString = workerName +":0:1:0.0";
     Assertions.assertEquals(workerString, testWorker.toString());
   }
+  
+  @Test
+  void testWillOverloadFalse() throws NullPointerException, InvalidName, InvalidQualifications {
+    testWorker.addProject(new Project("P Small", ProjectSize.SMALL, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P Mid", ProjectSize.MEDIUM, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P Large", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    
+    Assertions.assertFalse(testWorker.willOverload(new Project("P Large", ProjectSize.LARGE, ProjectStatus.PLANNED, testQaulifications)));
+    
+  }
+  
+  @Test
+  void testWillOverloadTrue() throws NullPointerException, InvalidName, InvalidQualifications {
+    testWorker.addProject(new Project("P1", ProjectSize.MEDIUM, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P2", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P3", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P4", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    
+    Assertions.assertTrue(testWorker.willOverload(new Project("P Large", ProjectSize.MEDIUM, ProjectStatus.PLANNED, testQaulifications)));
+    
+  }
+  
+  @Test
+  void testWillOverloadNull() throws NullPointerException, InvalidName, InvalidQualifications {
+    Assertions.assertThrows(NullPointerException.class, () ->{
+      testWorker.willOverload(null);
+    });
+  }
+    
+  
   
 
 }
