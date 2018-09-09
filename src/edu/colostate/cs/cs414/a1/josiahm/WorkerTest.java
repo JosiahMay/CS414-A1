@@ -16,7 +16,7 @@ class WorkerTest {
   
   
   @BeforeEach
-  void resetQualifications() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void resetQualifications() throws NullPointerException, InvalidName, InvalidQualifications, InvalidDescription {
     testQaulifications.clear();
     testQaulifications.add(new Qualification("Q 1"));
     testWorker = new Worker(workerName, testQaulifications);
@@ -26,7 +26,7 @@ class WorkerTest {
   void testWorker() {
       try {
         testWorker = new Worker(workerName, testQaulifications);
-      } catch (InvalidDescription | InvalidQualifications e) {
+      } catch (InvalidName | InvalidQualifications e) {
         fail(e.getMessage());
       }
       
@@ -43,7 +43,7 @@ class WorkerTest {
   
   @Test
   void testWorkerInvalidNameEmpty() {
-    Assertions.assertThrows(InvalidDescription.class, () -> {
+    Assertions.assertThrows(InvalidName.class, () -> {
       testWorker = new Worker("", testQaulifications);
       
     });
@@ -51,7 +51,7 @@ class WorkerTest {
   
   @Test
   void testWorkerInvalidNameSpaces() {
-    Assertions.assertThrows(InvalidDescription.class, () -> {
+    Assertions.assertThrows(InvalidName.class, () -> {
       testWorker = new Worker("  ", testQaulifications);
       
     });
@@ -62,7 +62,7 @@ class WorkerTest {
     try {
       testWorker = new Worker("  as", testQaulifications);
       Assertions.assertTrue(true);
-    } catch (InvalidDescription | InvalidQualifications e) {
+    } catch (InvalidName | InvalidQualifications e) {
       fail(e.getMessage());
     }
   }
@@ -121,6 +121,36 @@ class WorkerTest {
     });
   }
   
+  @Test
+  void testAddGetProject() throws NullPointerException, InvalidName, InvalidQualifications {
+    Project project = new Project("Valid Project", ProjectSize.LARGE, ProjectStatus.PLANNED, testQaulifications);
+    HashSet<Project> projects = new HashSet<Project>();
+    projects.add(project);
+    
+    testWorker.addProject(project);
+    
+    Assertions.assertIterableEquals(projects, testWorker.getProjects());
+  }
+  
+  @Test
+  void testAddProjectNull() throws NullPointerException, InvalidDescription {
+    Assertions.assertThrows(NullPointerException.class, () ->{
+      testWorker.addProject(null);
+    });
+  }
+  
+  @Test
+  void testEqualsObject() throws NullPointerException, InvalidName, InvalidQualifications, InvalidDescription {
+    Worker object1 = new Worker(workerName, testQaulifications);
+    Worker object2 = new Worker(workerName, testQaulifications);
+    Assertions.assertEquals(object1, object2);
+  }
+  
+  @Test
+  void testToString() {
+    String workerString = workerName +":0:1:0.0";
+    Assertions.assertEquals(workerString, testWorker.toString());
+  }
   
 
 }

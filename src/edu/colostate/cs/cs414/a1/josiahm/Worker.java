@@ -7,24 +7,24 @@ public class Worker {
   private final String name;
   private final HashSet<Qualification> qualifications;
   private final HashSet<Project> projects;
-  private Double salary = 0.0;
+  private Double salary;
 
   /**
    * Constructor for a Worker object. The name and qualifications must not be empty or null 
    * @param name Name of the worker
    * @param qs The set qualifications of the worker
-   * @throws InvalidDescription An empty name was given
+   * @throws InvalidName An empty name was given
    * @throws InvalidQualifications An empty set of qualification was given
    * @throws NullPointerException Either the name or set of qualifications are null
    */
-  public Worker(String name, HashSet<Qualification> qs ) throws InvalidDescription, InvalidQualifications,  NullPointerException{
+  public Worker(String name, HashSet<Qualification> qs ) throws InvalidName, InvalidQualifications,  NullPointerException{
     
     if(name == null) {
       throw new NullPointerException("The name for a worker can not be null");
       }
     
     if(name.length() == 0 || !name.matches(".*\\S+.*")) {
-      throw new InvalidDescription("The name for a worker must not be empty");
+      throw new InvalidName("The name for a worker must not be empty");
       }
     
     if(qs == null) {
@@ -38,6 +38,7 @@ public class Worker {
     this.name = name;
     this.qualifications = new HashSet<Qualification>(qs);
     this.projects = new HashSet<Project>();
+    salary = new Double(0.0);
   }
   
   /**
@@ -85,7 +86,25 @@ public class Worker {
     return this.qualifications.add(q);
   }
   
+  /**
+   * Get all the project the worker is assigned to
+   * @return the projects
+   */
+  public HashSet<Project> getProjects() {
+    return projects;
+  }
   
+  /**
+   * Adds a project to the workers assigned projects 
+   * @param p the project to add
+   * @throws NullPointerException project was null
+   */
+  public void addProject(Project p) throws NullPointerException{
+    if(p == null) {
+      throw new NullPointerException("Workers can not add a null project");
+      }
+    this.projects.add(p);
+  }
   
   
   /**
@@ -107,6 +126,13 @@ public class Worker {
   public int hashCode() {
 	  return this.name.hashCode();
   }
+  
+  @Override
+  public String toString() {
+    return name+ ":" + projects.size() + ":" + qualifications.size() + ":" + salary;
+  }
+
+  
   
   
 

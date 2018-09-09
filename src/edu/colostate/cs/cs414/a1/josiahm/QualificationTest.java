@@ -17,7 +17,7 @@ class QualificationTest {
   
   
   @BeforeEach
-  void resetQualifications() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void resetQualifications() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     
     testQaulifications.clear();
     

@@ -115,14 +115,14 @@ class ProjectTest {
   }
   
   @Test
-  void testMissingQualificationsNone() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testMissingQualificationsNone() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     Worker testWorker = new Worker(workerName, testQaulifications);
     testProject.addWorker(testWorker);
     Assertions.assertIterableEquals(new HashSet<Qualification>(), testProject.missingQualifications());
   }
 
   @Test
-  void testMissingQualificationsOne() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testMissingQualificationsOne() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     
     testProject.addQualification(new Qualification("Q 2"));
     Worker testWorker = new Worker(workerName, testQaulifications);
@@ -135,7 +135,7 @@ class ProjectTest {
   }
 
   @Test
-  void testAddWorkerTrue() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testAddWorkerTrue() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     Worker testWorker = new Worker(workerName, testQaulifications);
     Assertions.assertTrue(testProject.addWorker(testWorker));
     HashSet<Worker> workers = new HashSet<Worker>();
@@ -153,13 +153,13 @@ class ProjectTest {
   }
 
   @Test
-  void testIsHelpfulTrue() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testIsHelpfulTrue() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     Worker testWorker = new Worker(workerName, testQaulifications);
     Assertions.assertTrue(testProject.isHelpful(testWorker));
   }
   
   @Test
-  void testIsHelpfulFalse() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testIsHelpfulFalse() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     testQaulifications.clear();
     testQaulifications.add(new Qualification("Q 2"));
     
@@ -200,6 +200,7 @@ class ProjectTest {
     Project object1 = new Project(projectName, projectSize, projectStatus, testQaulifications);
     Project object2 = new Project("Not the Same", projectSize, projectStatus, testQaulifications);
     Assertions.assertNotEquals(object1, object2);
+    
   }
 
   @Test
@@ -209,7 +210,7 @@ class ProjectTest {
   }
   
   @Test
-  void testRemoveWorker() throws NullPointerException, InvalidDescription, InvalidQualifications {
+  void testRemoveWorker() throws NullPointerException, InvalidDescription, InvalidQualifications, InvalidName {
     Worker testWorker = new Worker(workerName, testQaulifications);
     testProject.addWorker(testWorker);
     Assertions.assertTrue(testProject.removeWorker(testWorker));

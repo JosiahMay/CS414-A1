@@ -6,7 +6,7 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
-@SelectClasses({WorkerTest.class, ProjectTest.class, QualificationTest.class})
+@SelectClasses({WorkerTest.class, ProjectTest.class, QualificationTest.class, CompanyTest.class})
 public class TestAll {
 
 
