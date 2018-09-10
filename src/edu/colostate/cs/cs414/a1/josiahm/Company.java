@@ -128,14 +128,8 @@ public class Company {
    */
   public boolean assign(Worker w, Project p) throws NullPointerException{
     // Check for nulls
-    if(w == null) {
-      throw new NullPointerException("Can not assign null to a project");
-    }
-    if(p == null) {
-      throw new NullPointerException("Can not assign a worker to a null project");
-    }
-    // Check if the project and worker are part of the company
-    if(!availableWorkers.contains(w) || !projects.contains(p) ) {
+    if(checkValidWorkerProject(w, "Can not assign null to a project",
+        p, "Can not assign a worker to a null project")){
       return false;
     }
     // Check if the project can assign new workers
@@ -159,6 +153,29 @@ public class Company {
   }
   
   /**
+   * Checks if a worker and project are null and if they are know to the company
+   * @param w worker to check
+   * @param message1 message if worker if null
+   * @param p project to check
+   * @param message2 message if project is null
+   * @return true if worker and project are part of the company
+   */
+  private boolean checkValidWorkerProject(Worker w, String message1, Project p, String message2) throws NullPointerException {
+    if(w == null) {
+      throw new NullPointerException(message1);
+    }
+    if(p == null) {
+      throw new NullPointerException(message2);
+    }
+    // Check if the project and worker are part of the company
+    if(!availableWorkers.contains(w) || !projects.contains(p) ) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  /**
    * Unassigns a worker from a project and removes the worker from assigned workers list
    * if the worker is assigned to no other project
    * @param w the worker to unassign
@@ -167,16 +184,9 @@ public class Company {
    * @throws NullPointerException the worker or project was null
    */
   public boolean unassign(Worker w, Project p) throws NullPointerException{
-    // Check for nulls
-    if(w == null) {
-      throw new NullPointerException("Can not unassign null to a project");
-    }
-    if(p == null) {
-      throw new NullPointerException("Can not unassign a worker to a null project");
-    }
-    
-    // Check if the project and worker are part of the company
-    if(!availableWorkers.contains(w) || !projects.contains(p) ) {
+ // Check for nulls
+    if(checkValidWorkerProject(w, "Can not unassign null to a project",
+        p, "Can not unassign a worker to a null project")){
       return false;
     }
     // Remove worker
