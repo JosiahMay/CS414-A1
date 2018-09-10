@@ -1,0 +1,25 @@
+Josiah May A1
+
+Incomplete Specifications:
+None to my knowledge
+
+Issues encountered:
+The missing methods in the specifications in the workers and projects classes 
+made designing the company class difficult at first. 
+
+Since the specifications require the state of the object needed get methods,
+there was an issues using for loops to unassign a worker from all projects.
+To fix this issue, I make all the getter that returned a set return a shallow
+copy of the set. This fix works for the current specifications but this will
+not work if those sets are used for anything but checking values of items.
+
+
+Challenges of the assignment:
+Once I found what methods were missing from the assignment, it become much 
+easier to finish coding.
+
+The specifications require the state of the object to escape the oBject. This 
+allows the state to be modified by any class and makes the project completely 
+thread unsafe. I tried to protect the state but the specifications made this
+impossible.
+
