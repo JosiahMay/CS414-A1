@@ -1,6 +1,5 @@
 package edu.colostate.cs.cs414.a1.josiahm;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
 

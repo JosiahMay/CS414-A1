@@ -180,13 +180,24 @@ class WorkerTest {
   }
   
   @Test
-  void testWillOverloadTrue() throws NullPointerException, InvalidName, InvalidQualifications {
+  void testWillOverloadTrueOne() throws NullPointerException, InvalidName, InvalidQualifications {
     testWorker.addProject(new Project("P1", ProjectSize.MEDIUM, ProjectStatus.ACTIVE, testQaulifications));
     testWorker.addProject(new Project("P2", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
     testWorker.addProject(new Project("P3", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
     testWorker.addProject(new Project("P4", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
     
     Assertions.assertTrue(testWorker.willOverload(new Project("P Large", ProjectSize.MEDIUM, ProjectStatus.PLANNED, testQaulifications)));
+    
+  }
+  
+  @Test
+  void testWillOverloadTrueTwo() throws NullPointerException, InvalidName, InvalidQualifications {
+    testWorker.addProject(new Project("P1", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P2", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P3", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    testWorker.addProject(new Project("P4", ProjectSize.LARGE, ProjectStatus.ACTIVE, testQaulifications));
+    
+    Assertions.assertTrue(testWorker.willOverload(new Project("P Large", ProjectSize.SMALL, ProjectStatus.PLANNED, testQaulifications)));
     
   }
   
