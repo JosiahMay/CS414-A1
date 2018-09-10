@@ -1,8 +1,12 @@
 package edu.colostate.cs.cs414.a1.josiahm;
 
+import java.util.HashSet;
+
 public class Qualification {
   
   final private String description;
+  final private HashSet<Worker> workerWithQual;
+  final private HashSet<Project> projectWithQual;
 
   /**
    * Constructor for the qualification class. The description of the object is given
@@ -17,16 +21,41 @@ public class Qualification {
     if(description == null) {
       throw new NullPointerException("The description for a Qualification can not be null");
     }
-    System.out.println(description + ": " + description.matches(".*\\S+.*"));
+    
     if(description.length() == 0 || !description.matches(".*\\S+.*")) {
-      throw new InvalidDescription("The name for a qaulifcation must not be empty: " + description);
+      throw new InvalidDescription("The name for a qaulifcation must not be empty");
     }
     
-    this.description = description; 
+    this.description = description;
+    workerWithQual = new HashSet<Worker>();
+    projectWithQual = new HashSet<Project>();
   }
   
   /**
-   * Checks if the description of two qualification is the same
+   * Adds a worker to a set of all workers that have this qualification
+   * @param w the worker to add
+   * @throws NullPointerException the passed worker is null
+   */
+  public void addWorker(Worker w) throws NullPointerException {
+	  if (w == null) {
+		  throw new NullPointerException("The a worker to add to a qaualification can not be null");
+	  }
+	  this.workerWithQual.add(w);
+  }
+  
+  /**
+   * Adds a project to a set of all workers that have this qualification
+   * @param p the project to add
+   */
+  public void addProject(Project p) {
+    if (p == null) {
+      throw new NullPointerException("The a project to add to a qaualification can not be null");
+  }
+  this.projectWithQual.add(p);
+  }
+
+  /**
+   * Checks if the description of two qualification are the same
    *
    * @return The qualification have the same description
    */
@@ -38,7 +67,6 @@ public class Qualification {
     } 
     
     return false;
-    
   }
   
   /**
@@ -51,5 +79,10 @@ public class Qualification {
     return description;
   }
   
+  @Override
+  public int hashCode() {
+	  return this.description.hashCode();
+  }
 
+  
 }
